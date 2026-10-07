@@ -1,0 +1,3 @@
+# Versions installed and checked in the Python 3.11 ai_rps environment.
+opencv-python==5.0.0.93
+mediapipe==1.0.1

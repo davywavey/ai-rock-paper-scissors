@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AI 石头剪刀布：在线试玩三局两胜与自适应出拳策略，下载 OpenCV + MediaPipe 摄像头完整版。">
+  <title>AI 猜拳擂台 | Rock Paper Scissors</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23091019'/%3E%3Cpath d='M7 23L16 7l9 16M11 18h10' fill='none' stroke='%23dfff68' stroke-width='3'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#game"><span class="brand-mark">AI</span><span>猜拳擂台<small>ROCK · PAPER · SCISSORS</small></span></a>
+    <a class="source-link" href="https://github.com/davywavey/ai-rock-paper-scissors" target="_blank" rel="noopener noreferrer">GitHub 源码</a>
+  </header>
+  <main>
+    <section class="intro" aria-labelledby="title">
+      <span class="eyebrow">PLAYER VS. ADAPTIVE AI</span>
+      <h1 id="title">下一拳，<em>别被猜中。</em></h1>
+      <p>先拿 2 分，赢下擂台。AI 会学习你的出拳习惯。</p>
+    </section>
+    <section id="game" class="arcade" aria-label="AI 猜拳游戏">
+      <div class="game-top"><span id="round-label">ROUND 01</span><span class="mode">在线策略试玩 · 点击出拳</span><button id="sound-button" class="text-button" aria-pressed="false">声音：关</button></div>
+      <div class="scoreboard">
+        <div><span class="player-label">YOU / 玩家</span><strong id="player-score">0</strong></div>
+        <span class="score-divider">:</span>
+        <div><span class="player-label">AI / 对手</span><strong id="ai-score">0</strong></div>
+      </div>
+      <div class="arena" aria-live="polite" aria-atomic="true">
+        <div class="hand-slot"><span id="player-hand" class="hand">?</span><span id="player-move">YOUR MOVE</span></div>
+        <div class="result-slot"><span id="phase-label">READY TO PLAY</span><h2 id="result">选一拳，开局。</h2><p id="round-hint">点击下方手势，与 AI 对决</p></div>
+        <div class="hand-slot"><span id="ai-hand" class="hand ai-hand">?</span><span id="ai-move">AI MOVE</span></div>
+      </div>
+      <div class="move-buttons" aria-label="选择你的出拳">
+        <button data-move="ROCK"><span aria-hidden="true">✊</span><strong>石头</strong><small>ROCK · 1</small></button>
+        <button data-move="PAPER"><span aria-hidden="true">✋</span><strong>布</strong><small>PAPER · 2</small></button>
+        <button data-move="SCISSORS"><span aria-hidden="true">✌️</span><strong>剪刀</strong><small>SCISSORS · 3</small></button>
+      </div>
+      <div class="round-actions"><button id="next-button" class="next-button" disabled>下一轮 · SPACE</button><button id="reset-button" class="text-button">重置 · R</button></div>
+      <div class="game-bottom"><span>连胜 <b id="streak">0</b></span><span>最高 <b id="best">0</b></span><span id="ai-status">AI 正在学习</span></div>
+      <div id="particles" aria-hidden="true"></div>
+    </section>
+    <section class="details" aria-label="项目说明">
+      <article><span class="section-number">01 / HOW IT PLAYS</span><h2>不只是随机出拳</h2><p>前两轮随机，随后根据最近 8 次出拳预测你最常用的手势。AI 有 65% 的机会选择克制它的一拳，另外 35% 保持随机。平局不加分，先拿 2 分获胜。</p><p class="muted">连胜按整场比赛计算。改变习惯，让 AI 猜错。</p></article>
+      <article><span class="section-number">02 / CAMERA EDITION</span><h2>站到镜头前，直接出拳</h2><p>桌面完整版使用 OpenCV + MediaPipe，在本机识别 ✊ ✋ ✌️。支持 3 秒倒计时、镜像画面、旋转手势关键点兜底识别、粒子特效与音效。</p><p class="muted">此在线 Demo 展示出拳策略；摄像头手势识别请运行 Python 版。两者分别计分，刷新页面会重置试玩记录。</p></article>
+    </section>
+    <section class="download" aria-labelledby="download-title"><div><span class="section-number">PLAY THE FULL GAME</span><h2 id="download-title">把擂台带到你的电脑上。</h2><p>Python 3.11 · 摄像头 · Windows / macOS / Linux<br>Windows 下也可运行 setup-windows.bat，再双击 start-game.bat。</p></div><div><pre><code>python -m venv .venv
+# 激活环境后：
+python -m pip install -r requirements.txt
+python main.py</code></pre><a href="https://github.com/davywavey/ai-rock-paper-scissors" target="_blank" rel="noopener noreferrer">下载源码与手势模型</a></div></section>
+  </main>
+  <footer><span>AI ROCK PAPER SCISSORS</span><span>本地识别 · 无需 API 密钥 · 无摄像头数据上传</span></footer>
+  <script src="app.js" defer></script>
+</body>
+</html>
